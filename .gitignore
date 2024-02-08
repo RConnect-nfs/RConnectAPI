@@ -16,6 +16,7 @@ obj/
 
 .idea/
 .vs/
+.vscode/
 .cache/
 .git/
 

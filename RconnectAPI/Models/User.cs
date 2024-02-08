@@ -1,29 +1,38 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace RconnectAPI.Models
 {
+    [BsonIgnoreExtraElements]
     public class User
     {
-
-        public string Alias { get; set; }
-        public byte[] Password { get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public List<int> Hobbies { get; set; } = new List<int>();
-        public List<int> Contacts { get; set; } = new List<int>();
-
-        public User(string alias, string password, string email, string name, int age, List<int> hobbies, List<int> contacts)
+        public User(string? id, byte[] password, string firstname, string lastname, string username, string email, string name, DateTime dob)
         {
-            Alias = alias;
-            Password = HashPassword(password);
+            Id = id;
+            Password = password;
+            Firstname = firstname;
+            Lastname = lastname;
+            Username = username;
             Email = email;
             Name = name;
-            Age = age;
-            Hobbies = hobbies;
-            Contacts = contacts;
+            Dob = dob;
         }
+
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+        
+        public byte[] Password { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public DateTime Dob { get; set; }
+        public List<string> Hobbies { get; set; } = new List<string>();
+        public List<string> Contacts { get; set; } = new List<string>();
 
         private byte[] HashPassword(string password)
         {

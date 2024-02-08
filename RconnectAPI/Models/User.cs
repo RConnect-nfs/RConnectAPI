@@ -8,31 +8,35 @@ namespace RconnectAPI.Models
     [BsonIgnoreExtraElements]
     public class User
     {
-        public User(string? id, byte[] password, string firstname, string lastname, string username, string email, string name, DateTime dob)
+        public User(string? id, string username, byte[] password, string email, string firstname, string lastname, DateTime birthdate, List<string> hobbies, List<string> contacts, List<string> rating, List<string> missedmeetings)
         {
             Id = id;
+            Username = username;
             Password = password;
+            Email = email;
             Firstname = firstname;
             Lastname = lastname;
-            Username = username;
-            Email = email;
-            Name = name;
-            Dob = dob;
+            Birthdate = birthdate;
+            Hobbies = hobbies;
+            Contacts = contacts;
+            Rating = rating;
+            Missedmeetings = missedmeetings;
         }
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
-        
+        public string Username { get; set; }
         public byte[] Password { get; set; }
+        public string Email { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public DateTime Dob { get; set; }
+        public DateTime Birthdate { get; set; }
         public List<string> Hobbies { get; set; } = new List<string>();
         public List<string> Contacts { get; set; } = new List<string>();
+        public List<string> Rating { get; set; } = new List<string>();
+        public List<string> Missedmeetings { get; set; } = new List<string>();
+
 
         private byte[] HashPassword(string password)
         {

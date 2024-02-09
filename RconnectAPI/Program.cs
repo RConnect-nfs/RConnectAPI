@@ -9,7 +9,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDB"));
+//Scoped
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<HobbyService>();
+builder.Services.AddSingleton<HostService>();
+builder.Services.AddSingleton<MeetingService>();
 
 builder.Services.AddControllers();
 

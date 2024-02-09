@@ -1,0 +1,31 @@
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using RconnectAPI.Models;
+using Host = RconnectAPI.Models.Host;
+namespace RconnectAPI.Services;
+
+public class HostService
+{
+    private readonly IMongoCollection<Host> _hostCollection;
+
+    public HostService(IOptions<MongoDbSettings> mongoDBSettings) {
+        MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionUri);
+        IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
+        _hostCollection = database.GetCollection<Host>("hosts");
+    }
+
+    public async Task<List<Host>> GetAsync() =>
+        await _hostCollection.Find(_ => true).ToListAsync();
+
+    public async Task<Host?> GetAsync(string id) =>
+        await _hostCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+    public async Task CreateAsync(Host newUser) =>
+        await _hostCollection.InsertOneAsync(newUser);
+
+    public async Task UpdateAsync(string id, Host updatedBook) =>
+        await _hostCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+
+    public async Task RemoveAsync(string id) =>
+        await _hostCollection.DeleteOneAsync(x => x.Id == id);
+}

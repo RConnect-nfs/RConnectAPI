@@ -33,12 +33,26 @@ public class HobbyController: Controller {
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Hobby newBook)
+    public async Task<IActionResult> Post([FromBody] Hobby newHobby)
     {
-        await _hobbyService.CreateAsync(newBook);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-        return CreatedAtAction(nameof(Get), new { id = newBook.Id }, newBook);
+        try
+        {
+            await _hobbyService.CreateAsync(newHobby);
+
+            return CreatedAtAction(nameof(Get), newHobby);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            return StatusCode(500, "An error occurred while creating the hobby.");
+        }
     }
+
 
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, Hobby updatedBook)

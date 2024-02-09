@@ -5,7 +5,8 @@ namespace RconnectAPI.Models
 {
     public class Host
     {
-        public Host(string name, string description, string adress, string city, string phone, Boolean isverified, List<string> openinghours = null)
+        public Host(string name, string description, string adress, string city, string phone, Boolean isverified, List<string>? openinghours = null)
+
         {
             Name = name;
             Description = description;
@@ -15,7 +16,6 @@ namespace RconnectAPI.Models
             Isverified = isverified;
             Openinghours = openinghours;
         }
-
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

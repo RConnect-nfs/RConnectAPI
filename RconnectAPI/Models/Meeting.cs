@@ -1,4 +1,7 @@
-﻿namespace RconnectAPI.Models
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace RconnectAPI.Models
 {
     public class Meeting
     {
@@ -11,6 +14,8 @@
             Billedusers = billedusers;
         }
 
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         public List<string> Users { get; set; } = new List<string>();
         public string Host { get; set; }

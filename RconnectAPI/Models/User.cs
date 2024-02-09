@@ -45,7 +45,7 @@ namespace RconnectAPI.Models
                     rng.GetBytes(salt);
                 }
 
-                var iterations = 10000; // Ajuster le nombre d'itérations selon le besoin
+                var iterations = 10000; 
                 var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 var key = new byte[hmac.HashSize / 8];
                 for (int i = 0; i < iterations; i++)

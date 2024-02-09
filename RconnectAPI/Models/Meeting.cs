@@ -5,9 +5,8 @@ namespace RconnectAPI.Models
 {
     public class Meeting
     {
-        public Meeting(string? id, List<string> users, string host, DateTime date, List<string> billedusers)
-        {
-            Id = id;
+        public Meeting(List<string> users, string host, DateTime date, List<string> billedusers)
+        { 
             Users = users;
             Host = host;
             Date = date;

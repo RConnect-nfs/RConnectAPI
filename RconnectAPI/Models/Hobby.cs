@@ -5,9 +5,8 @@ namespace RconnectAPI.Models
 {
     public class Hobby
     {
-        public Hobby(string? id, string name, string description)
+        public Hobby(string name, string description)
         {
-            Id = id;
             Name = name;
             Description = description;
         }

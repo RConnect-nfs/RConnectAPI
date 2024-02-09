@@ -5,9 +5,8 @@ namespace RconnectAPI.Models
 {
     public class Host
     {
-        public Host(string? id, string name, string description, string adress, string city, string phone, List<string> openinghours)
+        public Host(string name, string description, string adress, string city, string phone, List<string> openinghours)
         {
-            Id = id;
             Name = name;
             Description = description;
             Adress = adress;

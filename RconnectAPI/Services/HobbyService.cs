@@ -20,11 +20,11 @@ public class HobbyService
     public async Task<Hobby?> GetAsync(string id) =>
         await _hobbyCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(Hobby newUser) =>
-        await _hobbyCollection.InsertOneAsync(newUser);
+    public async Task CreateAsync(Hobby newHobby) =>
+        await _hobbyCollection.InsertOneAsync(newHobby);
 
-    public async Task UpdateAsync(string id, Hobby updatedBook) =>
-        await _hobbyCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+    public async Task UpdateAsync(string id, Hobby updatedHobby) =>
+        await _hobbyCollection.ReplaceOneAsync(x => x.Id == id, updatedHobby);
 
     public async Task RemoveAsync(string id) =>
         await _hobbyCollection.DeleteOneAsync(x => x.Id == id);

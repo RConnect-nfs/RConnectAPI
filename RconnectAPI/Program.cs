@@ -16,6 +16,12 @@ builder.Services.AddSingleton<HostService>();
 builder.Services.AddSingleton<MeetingService>();
 
 builder.Services.AddControllers();
+builder.Services.AddCors(o => o.AddPolicy("DEV", builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -24,6 +30,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("DEV");
 }
 
 app.UseHttpsRedirection();
